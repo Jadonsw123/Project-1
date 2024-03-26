@@ -17,14 +17,14 @@ with open(file_path, 'r') as file:
         items = [i.replace(":","").strip() for i in row]
         # items = [item.strip() for item in row]  # Remove leading and trailing spaces
         # print(items)
-        #need to put custom output instead of the line, also if sql find is bad 
         try:
             if(items[0] == 'e'):
                 #check that not null
-                # query = "DROP TABLE Player;"
-                # cursor.execute(query)
-                # query = "DROP TABLE Matches;"
-                # cursor.execute(query)
+
+                query = "DROP TABLE Matches;"
+                cursor.execute(query)
+                query = "DROP TABLE Player;"
+                cursor.execute(query)
                 
                 print("Creating Tables if they don't exist")
                 query = ("""
@@ -51,8 +51,8 @@ with open(file_path, 'r') as file:
                     PreRatingGuest INT UNSIGNED CHECK (PreRatingGuest >= 100),
                     PostRatingGuest INT UNSIGNED CHECK (PostRatingGuest >= 100),
                     PRIMARY KEY (HostID, GuestID, Start),
-                    FOREIGN KEY (HostID) REFERENCES Player(ID) ON DELETE CASCADE,
-                    FOREIGN KEY (GuestID) REFERENCES Player(ID) ON DELETE CASCADE
+                    FOREIGN KEY (HostID) REFERENCES Player(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (GuestID) REFERENCES Player(ID) ON DELETE CASCADE ON UPDATE CASCADE
                 );
                 """)
                 # cursor.execute(query)

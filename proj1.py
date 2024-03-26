@@ -211,3 +211,5 @@ with open(file_path, 'r') as file:
                 print(f"{row}, Input Invalid: {err}")
         except ValueError as err:
             print(f"{row}, Input Invalid: {err}")
+        except Exception as err:
+            print(F"{row}, Input Invalid: {err}")
